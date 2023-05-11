@@ -18,7 +18,8 @@ describe("/api/categories", () => {
       .get("/api/categories")
       .expect(200)
       .then((response) => {
-        expect(Array.isArray(response.body.result)).toBe(true);
+        console.log(response.body.result)
+        expect(Array.isArray(response.body.categories)).toBe(true);
       });
   });
 
@@ -26,7 +27,7 @@ describe("/api/categories", () => {
     return request(app)
       .get("/api/categories")
       .then((response) => {
-        expect(response.body.result.length).not.toBe([]);
+        expect(response.body.categories.length).not.toBe([]);
       });
   });
 
@@ -34,8 +35,8 @@ describe("/api/categories", () => {
     return request(app)
       .get("/api/categories")
       .then((response) => {
-        expect(response.body.result).not.toHaveLength(0)
-        for (const element of response.body.result) {
+        expect(response.body.categories).not.toHaveLength(0)
+        for (const element of response.body.categories) {
           expect(element).toHaveProperty("slug");
           expect(element).toHaveProperty("description");
         }
@@ -44,7 +45,7 @@ describe("/api/categories", () => {
 });
 
 describe("404 path not found", () => {
-  it("should return a meessage if the url is invalid", () => {
+  it("should return a message if the url is invalid", () => {
     return request(app)
       .get("/api/nonsense")
       .expect(404)
