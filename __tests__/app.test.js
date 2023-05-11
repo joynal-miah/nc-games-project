@@ -18,7 +18,6 @@ describe("/api/categories", () => {
       .get("/api/categories")
       .expect(200)
       .then((response) => {
-        console.log(response.body.result)
         expect(Array.isArray(response.body.categories)).toBe(true);
       });
   });
