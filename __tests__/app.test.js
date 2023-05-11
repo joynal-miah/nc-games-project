@@ -26,7 +26,7 @@ describe("/api/categories", () => {
     return request(app)
       .get("/api/categories")
       .then((response) => {
-        expect(response.body.result).not.toEqual([]);
+        expect(response.body.result.length).not.toBe([]);
       });
   });
 
@@ -34,6 +34,7 @@ describe("/api/categories", () => {
     return request(app)
       .get("/api/categories")
       .then((response) => {
+        expect(response.body.result).not.toHaveLength(0)
         for (const element of response.body.result) {
           expect(element).toHaveProperty("slug");
           expect(element).toHaveProperty("description");
