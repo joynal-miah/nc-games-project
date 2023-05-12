@@ -12,6 +12,17 @@ afterAll(() => {
   return db.end();
 });
 
+describe("GET /api", () => {
+  it("should return the endpoints object", () => {
+    return request(app)
+      .get("/api")
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual(expect.any(Object));
+      });
+  });
+});
+
 describe("/api/categories", () => {
   it("should return an array of objects if successfull, status 200", () => {
     return request(app)
@@ -34,7 +45,7 @@ describe("/api/categories", () => {
     return request(app)
       .get("/api/categories")
       .then((response) => {
-        expect(response.body.categories).not.toHaveLength(0)
+        expect(response.body.categories).not.toHaveLength(0);
         for (const element of response.body.categories) {
           expect(element).toHaveProperty("slug");
           expect(element).toHaveProperty("description");
