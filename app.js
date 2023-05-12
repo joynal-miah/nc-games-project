@@ -1,8 +1,8 @@
 const express = require('express');
-const { getCategories } = require('./controllers/controler');
+const { getCategories, getEndpoints } = require('./controllers/controler');
 const app = express();
 
-app.use(express.json());
+app.get('/api', getEndpoints);
 
 app.get('/api/categories', getCategories)
 
