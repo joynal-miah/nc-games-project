@@ -3,6 +3,7 @@ const request = require("supertest");
 const db = require("../db/connection.js");
 const seed = require("../db/seeds/seed.js");
 const dataTest = require("../db/data/test-data/index.js");
+const endpoints = require("../endpoints.json")
 
 beforeEach(() => {
   return seed(dataTest);
@@ -17,8 +18,11 @@ describe("GET /api", () => {
     return request(app)
       .get("/api")
       .then((response) => {
+        console.log(response.body)
+        console.log(endpoints)
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual(expect.any(Object));
+        expect(response.body).toEqual(endpoints)
       });
   });
 });
